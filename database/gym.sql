@@ -1,6 +1,6 @@
 
-drop database gym;
-create database gym;
+drop database if exists gym;
+create database if not exists gym;
 use gym;
 CREATE TABLE info(username VARCHAR(200), password VARCHAR(500), name VARCHAR(100), prof INT, street VARCHAR(100), city VARCHAR(50), phone VARCHAR(32), PRIMARY KEY(username));
 
@@ -19,5 +19,5 @@ CREATE TABLE progress(username VARCHAR(200), date DATE, daily_result VARCHAR(200
 create table equip(name VARCHAR(200), count int, PRIMARY KEY(name));
 
 INSERT INTO info(username, password, name, prof, street, city, phone) VALUES('eswar_123', '$5$rounds=535000$ajR8hAzSoSF.NhEs$MaLn1dbnXq9eu2W5Ge3c1ScAS9960yLBFv3aU9zaxc0', 'Parameswar K', 1, 'Adarshnagar', 'Anantapur', 9666585361);
---admin's password is eswar@259522
+-- admin's password is eswar@259522
 INSERT INTO plans(name) values ('Plan_1')

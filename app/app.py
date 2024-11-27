@@ -8,10 +8,11 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'gym-db'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_PASSWORD'] = 'pass'
 app.config['MYSQL_DB'] = 'gym'
+app.config['MYSQL_PORT'] = 3310
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
@@ -690,4 +691,4 @@ def logout():
 if __name__ == "__main__":
 	app.secret_key = '528491@JOKER'
 	app.debug = True
-	app.run()
+	app.run(host='0.0.0.0', port='5000')
