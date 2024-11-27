@@ -1,8 +1,20 @@
 pipeline{
     agent any
+    environment{
+        USERNAME = "fadhinotgr"
+        IMAGE_NAME = "gym-management-system-app"
+
+    }
     stages{
-        stage('git checkout'){
-            git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
+        stage("git checkout"){
+            steps{
+                git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
+            }
+        }
+        stage("docker build app"){
+            steps{          
+                sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:latest ."
+            }
         }
     }
 }
