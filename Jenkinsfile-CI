@@ -1,0 +1,8 @@
+pipeline{
+    agent any
+    stages{
+        stage('git checkout'){
+            git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
+        }
+    }
+}
