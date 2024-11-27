@@ -11,8 +11,8 @@ pipeline{
                 git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
             }
         }
-        stage("Build"){
-            steps{
+        stage("docker build app"){
+            steps{          
                 sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:latest ."
             }
         }
