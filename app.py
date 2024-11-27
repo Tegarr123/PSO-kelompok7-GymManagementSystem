@@ -5,6 +5,7 @@ from wtforms.fields import DateField
 from passlib.hash import sha256_crypt
 from functools import wraps
 from datetime import datetime
+from urllib.parse import quote as url_quote
 
 app = Flask(__name__)
 
@@ -691,3 +692,4 @@ if __name__ == "__main__":
 	app.secret_key = '528491@JOKER'
 	app.debug = True
 	app.run()
+	
