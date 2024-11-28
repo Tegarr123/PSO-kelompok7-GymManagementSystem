@@ -6,6 +6,11 @@ pipeline{
 
     }
     stages{
+        stage("Cleanup workspace"){
+            steps{
+                cleanWs()
+            }
+        }
         stage("git checkout"){
             steps{
                 git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
@@ -14,6 +19,11 @@ pipeline{
         stage("docker build app"){
             steps{          
                 sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:latest ."
+            }
+        }
+        stage("test app"){
+            steps{
+                sh "pytest test.py"
             }
         }
     }
