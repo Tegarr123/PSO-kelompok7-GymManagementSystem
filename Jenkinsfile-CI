@@ -26,5 +26,10 @@ pipeline{
                 sh "docker run fadhinotgr/gym-management-system-app:latest pytest test.py"
             }
         }
+        stage("trigger CD pipeline"){
+            steps{
+                sh "curl -X POST 'localhost:8080/job/app-CD/build?token=local_token'"
+            }
+        }
     }
 }
