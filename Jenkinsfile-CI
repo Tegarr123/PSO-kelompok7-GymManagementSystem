@@ -28,7 +28,7 @@ pipeline{
         }
         stage("trigger CD pipeline"){
             steps{
-                sh "curl -X POST 'fadhinotgr:local_token@localhost:8080/job/app-CD/build'"
+                sh "curl -X POST 'fadhinotegar:local_token@localhost:8080/job/app-CD/build'"
             }
         }
     }
