@@ -6,4 +6,4 @@ def test_status():
     
 def test_data():
     response = app.test_client().get('/')
-    assert b'<h1><strong>Welcome to Gym Management System</strong></h1>6' in response.data 
+    assert b'<h1><strong>Welcome to Gym Management System</strong></h1>' in response.data 
