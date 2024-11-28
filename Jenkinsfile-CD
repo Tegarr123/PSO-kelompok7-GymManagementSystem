@@ -10,8 +10,10 @@ pipeline{
     stages{
         stage("docker push image"){
             steps{
-                withDockerRegistry(credentialsId: 'docker') {
-                    sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
+                script{
+                    withDockerRegistry(credentialsId: 'docker') {
+                        sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
+                    }
                 }
             }
         }
