@@ -4,6 +4,7 @@ pipeline{
         USERNAME = "fadhinotgr"
         IMAGE_NAME = "gym-management-system-app"
         JENKINS_API_TOKEN = "1163fb8a9fdf9b8dcb5ca4a7ad422c09f7"
+        TRIGGER_TOKEN = "local_token"
 
     }
     stages{
@@ -29,7 +30,7 @@ pipeline{
         }
         stage("trigger CD pipeline"){
             steps{
-                sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  'http://localhost:8080/job/app-CD/build?token=local_token'"
+                sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  http://localhost:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
             }
         }
     }
