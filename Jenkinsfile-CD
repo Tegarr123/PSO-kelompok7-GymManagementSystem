@@ -1,9 +1,18 @@
 pipeline{
     agent any
+    environment{
+        USERNAME = "fadhinotgr"
+        IMAGE_NAME = "gym-management-system-app"
+        JENKINS_API_TOKEN = "1163fb8a9fdf9b8dcb5ca4a7ad422c09f7"
+        TRIGGER_TOKEN = "local_token"
+
+    }
     stages{
-        stage("print hello world"){
+        stage("docker push image"){
             steps{
-                echo 'Hello World'
+                withDockerRegistry(credentialsId: 'docker') {
+                    sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
+                }
             }
         }
     }
