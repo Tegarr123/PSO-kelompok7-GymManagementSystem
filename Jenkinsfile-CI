@@ -23,7 +23,7 @@ pipeline{
         }
         stage("test app"){
             steps{
-                sh "docker run -d fadhinotgr/gym-management-system-app:latest pytest test.py"
+                sh "docker run fadhinotgr/gym-management-system-app:latest pytest test.py"
             }
         }
     }
