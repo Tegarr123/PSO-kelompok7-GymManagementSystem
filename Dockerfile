@@ -6,4 +6,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN chmod +x run_app.sh
 EXPOSE 5000
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["pytest", "test.py"]
