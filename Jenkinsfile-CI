@@ -25,7 +25,8 @@ pipeline{
         }
         stage("test app"){
             steps{
-                sh "docker run fadhinotgr/gym-management-system-app:latest pytest test.py"
+                sh "docker run --name test-app fadhinotgr/gym-management-system-app:latest pytest test.py -p no:warnings"
+                sh "docker rm -f test-app"
             }
         }
         stage("trigger CD pipeline"){
