@@ -17,5 +17,22 @@ pipeline{
                 }
             }
         }
+        stage("cleanup artifact image"){
+            steps{
+                script{
+                    sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
+                }
+            }
+        }
+        stage("Deploy to kubernetes"){
+            steps{
+                echo "deploy to kubernetes"
+            }
+        }
+        stage("verify deployment"){
+            steps{
+                echo "verify deployment"
+            }
+        }
     }
 }
