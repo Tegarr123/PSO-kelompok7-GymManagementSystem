@@ -26,12 +26,9 @@ pipeline{
         }
         stage("Deploy to kubernetes"){
             steps{
-                echo "deploy to kubernetes"
-            }
-        }
-        stage("verify deployment"){
-            steps{
-                echo "verify deployment"
+                script{
+                    sh "kubectl apply -f gym-app.yaml"
+                }
             }
         }
     }
