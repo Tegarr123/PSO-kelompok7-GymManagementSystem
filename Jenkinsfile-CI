@@ -31,6 +31,11 @@ pipeline{
                 sh "docker rm -f test-app"
             }
         }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+             }
+         }
         stage("trigger CD pipeline"){
             steps{
                 sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"

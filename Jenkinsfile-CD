@@ -3,34 +3,33 @@ pipeline{
     environment{
         USERNAME = "fadhinotgr"
         IMAGE_NAME = "gym-management-system-app"
-        JENKINS_API_TOKEN = "1163fb8a9fdf9b8dcb5ca4a7ad422c09f7"
-        TRIGGER_TOKEN = "local_token"
 
     }
     stages{
-        stage("Hello World"){
+        
+        stage("docker push image"){
             steps{
                 script{
-                    echo "Hello World"
+                    withDockerRegistry(credentialsId: 'docker') {
+                        sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
+                    }
                 }
             }
         }
-        // stage("docker push image"){
-        //     steps{
-        //         script{
-        //             withDockerRegistry(credentialsId: 'docker') {
-        //                 sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage("cleanup artifact image"){
-        //     steps{
-        //         script{
-        //             sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
-        //         }
-        //     }
-        // }
+        stage("Trivy Image Scan") {
+             steps {
+                 script {
+	              sh "docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${USERNAME}/${IMAGE_NAME}:latest --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table > trivyimage.txt"
+                 }
+             }
+         }
+        stage("cleanup artifact image"){
+            steps{
+                script{
+                    sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
+                }
+            }
+        }
         // stage("Deploy to kubernetes"){
         //     steps{
         //         echo "Deploy to kubernetes"            
