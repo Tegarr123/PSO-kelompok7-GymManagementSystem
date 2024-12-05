@@ -15,7 +15,7 @@ pipeline{
         }
         stage("git checkout"){
             steps{
-                git branch: 'dev-tegar', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
             }
         }
         stage("docker build app"){
@@ -29,10 +29,10 @@ pipeline{
                 sh "docker rm -f test-app"
             }
         }
-        stage("trigger CD pipeline"){
-            steps{
-                sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  http://localhost:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
-            }
-        }
+        // stage("trigger CD pipeline"){
+        //     steps{
+        //         sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  http://localhost:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
+        //     }
+        // }
     }
 }
