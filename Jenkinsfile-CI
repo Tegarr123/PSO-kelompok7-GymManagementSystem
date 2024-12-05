@@ -33,7 +33,7 @@ pipeline{
         }
         stage("trigger CD pipeline"){
             steps{
-                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded'  http://${PUBLIC_ADDRESS}:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
+                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
             }
         }
     }
