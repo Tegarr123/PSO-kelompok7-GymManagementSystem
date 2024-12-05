@@ -2,9 +2,11 @@ pipeline{
     agent any
     environment{
         USERNAME = "fadhinotgr"
+        JENKINS_USERNAME = "gym-mgmt-username"
         IMAGE_NAME = "gym-management-system-app"
-        JENKINS_API_TOKEN = "1163fb8a9fdf9b8dcb5ca4a7ad422c09f7"
-        TRIGGER_TOKEN = "local_token"
+        JENKINS_API_TOKEN = "115cc0079257b6989072fa0d7ac041c9b1"
+        TRIGGER_TOKEN = "gym-mgmt-token-CD"
+        PUBLIC_ADDRESS = "ec2-54-146-101-150.compute-1.amazonaws.com"
 
     }
     stages{
@@ -29,10 +31,10 @@ pipeline{
                 sh "docker rm -f test-app"
             }
         }
-        // stage("trigger CD pipeline"){
-        //     steps{
-        //         sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  http://localhost:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
-        //     }
-        // }
+        stage("trigger CD pipeline"){
+            steps{
+                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN}  http://${PUBLIC_ADDRESS}:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
+            }
+        }
     }
 }

@@ -8,31 +8,38 @@ pipeline{
 
     }
     stages{
-        stage("docker push image"){
+        stage("Hello World"){
             steps{
                 script{
-                    withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
-                    }
+                    echo "Hello World"
                 }
             }
         }
-        stage("cleanup artifact image"){
-            steps{
-                script{
-                    sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
-                }
-            }
-        }
-        stage("Deploy to kubernetes"){
-            steps{
-                echo "Deploy to kubernetes"            
-            }
-        }
-        stage("verify deployment"){
-            steps{
-                echo "Verify deployment"
-            }
-        }
+        // stage("docker push image"){
+        //     steps{
+        //         script{
+        //             withDockerRegistry(credentialsId: 'docker') {
+        //                 sh "docker push ${USERNAME}/${IMAGE_NAME}:latest"
+        //             }
+        //         }
+        //     }
+        // }
+        // stage("cleanup artifact image"){
+        //     steps{
+        //         script{
+        //             sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
+        //         }
+        //     }
+        // }
+        // stage("Deploy to kubernetes"){
+        //     steps{
+        //         echo "Deploy to kubernetes"            
+        //     }
+        // }
+        // stage("verify deployment"){
+        //     steps{
+        //         echo "Verify deployment"
+        //     }
+        // }
     }
 }
