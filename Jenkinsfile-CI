@@ -6,7 +6,7 @@ pipeline{
         IMAGE_NAME = "gym-management-system-app"
         JENKINS_API_TOKEN = "11e8f70ea6cf3b47b0983f6d8a7b9af06a"
         TRIGGER_TOKEN = "gym-mgmt-token-CD"
-        PUBLIC_ADDRESS = "ec2-54-146-101-150.compute-1.amazonaws.com"
+        PUBLIC_ADDRESS = "ec2-54-82-9-78.compute-1.amazonaws.com"
 
     }
     stages{
