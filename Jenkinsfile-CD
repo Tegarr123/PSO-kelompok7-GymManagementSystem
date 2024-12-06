@@ -30,15 +30,15 @@ pipeline{
                 }
             }
         }
-        // stage("Deploy to kubernetes"){
-        //     steps{
-        //         echo "Deploy to kubernetes"            
-        //     }
-        // }
-        // stage("verify deployment"){
-        //     steps{
-        //         echo "Verify deployment"
-        //     }
-        // }
+        stage("Deploy to kubernetes"){
+            steps{
+                echo "Deploy to kubernetes"            
+            }
+        }
+        stage("verify deployment"){
+            steps{
+                echo "Verify deployment"
+            }
+        }
     }
 }
