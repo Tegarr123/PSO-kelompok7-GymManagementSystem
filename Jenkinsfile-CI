@@ -1,0 +1,38 @@
+pipeline{
+    agent any
+    environment{
+        USERNAME = "fadhinotgr"
+        IMAGE_NAME = "gym-management-system-app"
+        JENKINS_API_TOKEN = "1163fb8a9fdf9b8dcb5ca4a7ad422c09f7"
+        TRIGGER_TOKEN = "local_token"
+
+    }
+    stages{
+        stage("Cleanup workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("git checkout"){
+            steps{
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
+            }
+        }
+        stage("docker build app"){
+            steps{          
+                sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:latest ."
+            }
+        }
+        stage("test app"){
+            steps{
+                sh "docker run --name test-app fadhinotgr/gym-management-system-app:latest pytest test.py -p no:warnings"
+                sh "docker rm -f test-app"
+            }
+        }
+        // stage("trigger CD pipeline"){
+        //     steps{
+        //         sh "curl --user fadhinotgr:${JENKINS_API_TOKEN}  http://localhost:8080/job/app-CD/build?token=${TRIGGER_TOKEN}"
+        //     }
+        // }
+    }
+}
