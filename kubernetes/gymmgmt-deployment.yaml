@@ -44,4 +44,4 @@ spec:
     targetPort: 5000
   selector:
     app: gymmgmt
-  type: NodePort
+  type: LoadBalancer
