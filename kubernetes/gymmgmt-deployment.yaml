@@ -43,5 +43,5 @@ spec:
     protocol: TCP
     targetPort: 5000
   selector:
-    app: flaskapi
-  type: NodePort
+    app: gymmgmt
+  type: LoadBalancer
