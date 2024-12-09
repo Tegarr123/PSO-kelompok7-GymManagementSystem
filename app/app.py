@@ -5,14 +5,14 @@ from wtforms.fields import DateField
 from passlib.hash import sha256_crypt
 from functools import wraps
 from datetime import datetime
-
+import os
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'gym'
-app.config['MYSQL_PORT'] = 3306
+app.config['MYSQL_HOST'] = os.getenv("MYSQL_SERVICE_HOST")
+app.config['MYSQL_PASSWORD'] = os.getenv("db_root_password")
+app.config['MYSQL_DB'] = os.getenv("db_name")
+app.config['MYSQL_PORT'] = int(os.getenv("MYSQL_SERVICE_PORT"))
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)

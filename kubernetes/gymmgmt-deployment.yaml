@@ -1,23 +1,24 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gym-app-deployment
+  name: gymmgmt-deployment
   labels:
-    app: gym-app
+    app: gymmgmt
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: gym-app
+      app: gymmgmt
   template:
     metadata:
       labels:
-        app: gym-app
+        app: gymmgmt
     spec:
       containers:
-        - name: gym-app-container
-          image: fadhinotgr/gym-management-system-app
-          imagePullPolicy: Always
+        - name: gym-management-app
+          image: fadhinotgr/gym-management-system-app:latest
+          imagePullPolicy: IfNotPresent
           command: ["python"]
           args: ["app.py"]
           ports:
@@ -26,31 +27,21 @@ spec:
             - name: db_root_password
               valueFrom:
                 secretKeyRef:
-                  name: flaskapi-secrets
+                  name: gymmgmt-secrets
                   key: db_root_password
             - name: db_name
               value: gym
-          resources:
-            limits:
-              memory: 512Mi
-              cpu: "1"
-            requests:
-              memory: 256Mi
-              cpu: "0.2"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gym-app-service
-  labels:
-    app: gym-app
+  name: gymmgmt-service
 spec:
-  type: NodePort
   ports:
   - port: 5000
     protocol: TCP
     targetPort: 5000
-    nodePort: 31111
   selector:
-    app: gym-app
+    app: flaskapi
+  type: LoadBalancer
