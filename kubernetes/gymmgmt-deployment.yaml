@@ -45,3 +45,5 @@ spec:
   selector:
     app: flaskapi
   type: LoadBalancer
+  externalIPs:
+  - 192.168.0.10
