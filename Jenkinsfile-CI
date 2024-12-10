@@ -23,7 +23,7 @@ pipeline{
         }
         stage("docker build & push app"){
             steps{
-                withDockerRegistry(credentialsId: 'docker',url: 'registry.hub.docker.com') {
+                withDockerRegistry(credentialsId: 'docker',url: '') {
                     sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ."
                     sh "docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
                 }
