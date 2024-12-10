@@ -23,7 +23,7 @@ pipeline{
         }
         stage("docker build & push app"){
             steps{
-                withDockerRegistry(credentialsId: 'docker') {
+                withDockerRegistry(credentialsId: 'docker',url: 'https://hub.docker.com/repository/docker/fadhinotgr/gym-management-system-app') {
                     sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ."
                     sh "docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
                 }
