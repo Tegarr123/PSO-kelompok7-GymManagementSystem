@@ -12,12 +12,12 @@ CREATE TABLE trainors(username VARCHAR(200), PRIMARY KEY(username), FOREIGN KEY(
 
 CREATE TABLE members(username VARCHAR(200), plan VARCHAR(100), trainor VARCHAR(200), PRIMARY KEY(username), FOREIGN KEY(username) references info(username), FOREIGN KEY(plan) references plans(name), FOREIGN KEY(trainor) references trainors(username));
 
-ALTER TABLE info ADD time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;-- done for all tables
+ALTER TABLE info ADD time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 CREATE TABLE progress(username VARCHAR(200), date DATE, daily_result VARCHAR(200), time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(username, date), FOREIGN KEY(username) references members(username));
 
 create table equip(name VARCHAR(200), count int, PRIMARY KEY(name));
 
-INSERT INTO info(username, password, name, prof, street, city, phone) VALUES('eswar_123', '$5$rounds=535000$ajR8hAzSoSF.NhEs$MaLn1dbnXq9eu2W5Ge3c1ScAS9960yLBFv3aU9zaxc0', 'Parameswar K', 1, 'Adarshnagar', 'Anantapur', 9666585361);
--- admin's password is eswar@259522
-INSERT INTO plans(name) values ('Plan_1')
+INSERT INTO info(username, password, name, prof, street, city, phone) VALUES('gym-admin', '$5$rounds=535000$vQSDVemvtw9CS9jC$cvAxCJEiKHBOLQ5cpq5eqB9aiXGbp3JHt/y0yKCZvC4', 'Rafli k', 1, 'Keputih', 'Surabaya', 9666585361);
+INSERT INTO plans(name) values ('Plan_1');
+-- admin's password is gym-password

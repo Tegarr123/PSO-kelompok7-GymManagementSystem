@@ -4,6 +4,7 @@ pipeline{
         USERNAME = "fadhinotgr"
         JENKINS_USERNAME = "gym-mgmt-username"
         IMAGE_NAME = "gym-management-system-app"
+        
         JENKINS_API_TOKEN = "11e8f70ea6cf3b47b0983f6d8a7b9af06a"
         TRIGGER_TOKEN = "gym-mgmt-token-CD"
         PUBLIC_ADDRESS = "ec2-54-82-9-78.compute-1.amazonaws.com"
@@ -22,12 +23,12 @@ pipeline{
         }
         stage("docker build app"){
             steps{          
-                sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:latest ."
+                sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ."
             }
         }
         stage("test app"){
             steps{
-                sh "docker run --name test-app fadhinotgr/gym-management-system-app:latest pytest test.py -p no:warnings"
+                sh "docker run --name test-app ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} pytest test.py -p no:warnings"
                 sh "docker rm -f test-app"
             }
         }

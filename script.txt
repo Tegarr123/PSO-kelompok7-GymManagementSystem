@@ -1,0 +1,11 @@
+1. Setup kubernetes
+eksctl create cluster --name virtualtechbox-cluster \
+--region ap-southeast-1 \
+--node-type t2.small \
+--nodes 3 \
+
+2. Install Helm chart
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
