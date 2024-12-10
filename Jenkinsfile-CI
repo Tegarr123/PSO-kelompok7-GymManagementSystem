@@ -5,7 +5,7 @@ pipeline{
         JENKINS_USERNAME = "gym-mgmt-username"
         IMAGE_NAME = "gym-management-system-app"
 
-        JENKINS_API_TOKEN = "11e8f70ea6cf3b47b0983f6d8a7b9af06a"
+        JENKINS_API_TOKEN = "1123980572a35f47d6dd218ad7794a296f"
         TRIGGER_TOKEN = "gym-mgmt-token-CD"
         PUBLIC_ADDRESS = "localhost"
 
