@@ -4,7 +4,7 @@ pipeline{
         USERNAME = "fadhinotgr"
         JENKINS_USERNAME = "gym-mgmt-username"
         IMAGE_NAME = "gym-management-system-app"
-        
+
         JENKINS_API_TOKEN = "11e8f70ea6cf3b47b0983f6d8a7b9af06a"
         TRIGGER_TOKEN = "gym-mgmt-token-CD"
         PUBLIC_ADDRESS = "ec2-54-82-9-78.compute-1.amazonaws.com"
@@ -21,15 +21,12 @@ pipeline{
                 git branch: 'master', credentialsId: 'github', url: 'https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git'
             }
         }
-        stage("docker build app"){
-            steps{          
-                sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ."
-            }
-        }
-        stage("test app"){
+        stage("docker build & push app"){
             steps{
-                sh "docker run --name test-app ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} pytest test.py -p no:warnings"
-                sh "docker rm -f test-app"
+                withDockerRegistry(credentialsId: 'docker') {
+                    sh "docker image build -t ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} ."
+                    sh "docker push ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                }
             }
         }
         stage('TRIVY FS SCAN') {
@@ -37,9 +34,30 @@ pipeline{
                 sh "trivy fs . > trivyfs.txt"
              }
          }
+        stage("test app"){
+            steps{
+                sh "docker run --name test-app ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} pytest test.py -p no:warnings"
+                sh "docker rm -f test-app"
+            }
+        }
+        stage("Trivy Image Scan") {
+             steps {
+                 script {
+	              sh "docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER} --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table > trivyimage.txt"
+                 }
+             }
+         }
+         stage ('Cleanup Artifacts') {
+             steps {
+                 script {
+                      sh "docker rmi ${USERNAME}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                      sh "docker rmi ${USERNAME}/${IMAGE_NAME}:latest"
+                 }
+             }
+         }
         stage("trigger CD pipeline"){
             steps{
-                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
+                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} --data 'IMAGE_TAG=${BUILD_NUMBER}' http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
             }
         }
     }
