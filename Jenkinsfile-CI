@@ -7,7 +7,7 @@ pipeline{
 
         JENKINS_API_TOKEN = "11e8f70ea6cf3b47b0983f6d8a7b9af06a"
         TRIGGER_TOKEN = "gym-mgmt-token-CD"
-        PUBLIC_ADDRESS = "ec2-54-82-9-78.compute-1.amazonaws.com"
+        PUBLIC_ADDRESS = "localhost"
 
     }
     stages{
@@ -54,11 +54,11 @@ pipeline{
                  }
              }
          }
-        // stage("trigger CD pipeline"){
-        //     steps{
-        //         sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} --data 'IMAGE_TAG=${BUILD_NUMBER}' http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
-        //     }
-        // }
+        stage("trigger CD pipeline"){
+            steps{
+                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} --data 'IMAGE_TAG=${BUILD_NUMBER}' http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
+            }
+        }
     }
 
     post {
