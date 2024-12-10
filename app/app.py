@@ -12,7 +12,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_HOST'] = os.getenv("MYSQL_SERVICE_HOST")
 app.config['MYSQL_PASSWORD'] = os.getenv("db_root_password")
 app.config['MYSQL_DB'] = os.getenv("db_name")
-app.config['MYSQL_PORT'] = int(str(os.getenv("MYSQL_SERVICE_PORT")))
+app.config['MYSQL_PORT'] = 3306 if int(str(os.getenv("MYSQL_SERVICE_PORT"))) == None else int(str(os.getenv("MYSQL_SERVICE_PORT")))
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)

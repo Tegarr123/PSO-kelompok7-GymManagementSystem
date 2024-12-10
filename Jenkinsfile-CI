@@ -55,22 +55,22 @@ pipeline{
                  }
              }
          }
-        stage("trigger CD pipeline"){
-            steps{
-                sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} --data 'IMAGE_TAG=${BUILD_NUMBER}' http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
-            }
-        }
+        // stage("trigger CD pipeline"){
+        //     steps{
+        //         sh "curl --user ${JENKINS_USERNAME}:${JENKINS_API_TOKEN} --data 'IMAGE_TAG=${BUILD_NUMBER}' http://${PUBLIC_ADDRESS}:8080/job/pipeline-CD/build?token=${TRIGGER_TOKEN}"
+        //     }
+        // }
     }
 
-    post {
-        always {
-           emailext attachLog: true,
-               subject: "'${currentBuild.result}'",
-               body: "Project: ${env.JOB_NAME}<br/>" +
-                   "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                   "URL: ${env.BUILD_URL}<br/>",
-               to: 'fadhino987@gmail.com',                              
-               attachmentsPattern: 'trivyfs.txt'
-        }
-     }
+    // post {
+    //     always {
+    //        emailext attachLog: true,
+    //            subject: "'${currentBuild.result}'",
+    //            body: "Project: ${env.JOB_NAME}<br/>" +
+    //                "Build Number: ${env.BUILD_NUMBER}<br/>" +
+    //                "URL: ${env.BUILD_URL}<br/>",
+    //            to: 'fadhino987@gmail.com',                              
+    //            attachmentsPattern: 'trivyfs.txt'
+    //     }
+    //  }
 }
