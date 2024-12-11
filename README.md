@@ -56,49 +56,19 @@ Receptionists can:
 
 ### Tech Stack
 
-- **Frontend**: Jinja2, Flask.
-- **Backend**: Flask, Flask-SQLAlchemy, Flask-SQLAlchemy, WTForms, Passlib, pytest.
+- **Frontend**: Jinja2, html, css, bootstrap.
+- **Backend**: Flask, Flask-mysqldb, WTForms, Passlib, pytest.
 - **Database**: MySQL.
-- **DevOps**: Integrated CI/CD pipelines using Git/GitHub for version control, Docker for containerization, Jenkins for CI/CD pipeline prototyping, Kubernetes for deployment, AWS for setting cloud environment, etc.
-
-### System Requirements
-
-- **Server**: Minimum 2 GHz processor, 4 GB RAM.
-- **Database**: 100 GB storage (for tracking member details and progress).
+- **DevOps Tools**: Jenkins, Kubernetes, ArgoCD, Terraform, Grafana, Prometheus
 
 ### Installation & Setup
+Minikube (kuberenetes) installation documentation : https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
+Jenkins Installation : https://www.jenkins.io/doc/book/installing/
+Docker Installation : https://docs.docker.com/engine/install/
+1. clone the repository
+2. make sure you've installed Jenkins, minikube, and Docker in your system using following command
+   '''bash
+      jenkins --version
+   '''
+4. 
 
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/Tegarr123/PSO-kelompok7-GymManagementSystem.git
-   cd gym-management-system
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   npm install  # or pip install -r requirements.txt (for Python backend)
-   ```
-
-3. **Run the application**:
-
-   ```bash
-   npm start  # or python manage.py runserver
-   ```
-
-4. **Access the application**:  
-   Open [http://10.25.128.118:5000](http://10.25.128.118:5000) in your browser.
-
-### CI/CD Pipeline
-
-The project uses automated CI/CD pipelines for streamlined deployments:
-
-- **Code Testing**: Unit tests are automatically triggered on every push to the `master` branch.
-- **Docker Builds**: Docker images are built from the source code and pushed to a container registry.
-- **Kubernetes Deployment**: The application is deployed or updated in a Kubernetes cluster using a rolling update strategy to ensure minimal downtime.
-
-### Monitoring
-
-- **Logs**: Application logs are collected, stored, and visualized using the **ELK Stack** (Elasticsearch, Logstash, and Kibana). This ensures easy access and analysis of logs for debugging and monitoring.
-- **Performance Metrics**: Key metrics such as CPU usage, memory consumption, and request handling times are tracked using **Prometheus**. These metrics are visualized in **Grafana** dashboards for real-time monitoring and long-term analysis.
