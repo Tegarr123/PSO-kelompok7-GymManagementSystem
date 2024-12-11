@@ -74,6 +74,43 @@ Kubectl Installation : https://kubernetes.io/docs/tasks/tools/
    minikube --status
    kubectl version
    ```
-   
-4. 
+3. Install ArgoCD
+   1. create argocd namespace
+   ```bash
+   kubectl create namespace argocd
+   ```
+   2. apply yaml configuration and installation for argoCD
+   ```bash
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+   ```
+   3. verify that argoCD pods have been created
+   ```bash
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+   ```
+   4. Expose argoCD
+   ```bash
+   kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+   ```
+   5. wait about 5 minute for node creation & run following command to open argoCD
+   ```bash
+   minikube service argocd-server -n argocd
+   ```
+   6. get the secret password for argoCD by executing following command and copy the password
+   ```bash
+      kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode && echo
+   ```
+   7. Login argoCD account with **admin** username and password you've got from step 6
+
+### Web Deployment with argoCD & kubernetes
+   1. Apply the yaml app configuration file
+   ```bash
+   kubectl apply -f gymmgmt-application.yaml
+   ```
+   7. wait about 15 minutes for node creation
+   8. run following command to open the web app
+   ```bash
+   minikube service gymmgmt-service -n gym-app
+   ```
+
+
 
