@@ -59,13 +59,16 @@ Receptionists can:
 - **Frontend**: Jinja2, html, css, bootstrap.
 - **Backend**: Flask, Flask-mysqldb, WTForms, Passlib, pytest.
 - **Database**: MySQL.
-- **DevOps Tools**: Jenkins, Kubernetes, ArgoCD, Terraform, Grafana, Prometheus
+- **DevOps Tools**: Docker, Jenkins, ArgoCD, Terraform, Kubernetes.
+- **Monitoring**: Grafana, Prometheus.
 
 ### Installation & Setup
+
 Minikube (kuberenetes) installation documentation : https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
 Jenkins Installation : https://www.jenkins.io/doc/book/installing/
 Docker Installation : https://docs.docker.com/engine/install/
 Kubectl Installation : https://kubernetes.io/docs/tasks/tools/
+
 1. clone the repository
 2. make sure you've installed Jenkins, minikube, Docker, and kubectl in your system using following command
    ```bash
@@ -102,15 +105,16 @@ Kubectl Installation : https://kubernetes.io/docs/tasks/tools/
    7. Login argoCD account with **admin** username and password you've got from step 6
 
 ### Web Deployment with argoCD & kubernetes
-   1. Apply the yaml app configuration file
-   ```bash
-   kubectl apply -f gymmgmt-application.yaml
-   ```
-   7. wait about 15 minutes for node creation
-   8. run following command to open the web app
-   ```bash
-   minikube service gymmgmt-service -n gym-app
-   ```
 
+1.  Apply the yaml app configuration file
 
+```bash
+kubectl apply -f gymmgmt-application.yaml
+```
 
+7.  wait about 15 minutes for node creation
+8.  run following command to open the web app
+
+```bash
+minikube service gymmgmt-service -n gym-app
+```
