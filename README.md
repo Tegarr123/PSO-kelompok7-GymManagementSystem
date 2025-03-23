@@ -64,10 +64,11 @@ Receptionists can:
 
 ### Installation & Setup
 
-Minikube (kuberenetes) installation documentation : https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
-Jenkins Installation : https://www.jenkins.io/doc/book/installing/
-Docker Installation : https://docs.docker.com/engine/install/
-Kubectl Installation : https://kubernetes.io/docs/tasks/tools/
+- Minikube (kuberenetes) installation documentation : https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
+- Jenkins Installation : https://www.jenkins.io/doc/book/installing/
+- Docker Installation : https://docs.docker.com/engine/install/
+- Kubectl Installation : https://kubernetes.io/docs/tasks/tools/
+- Script for GitOps : https://github.com/Tegarr123/GymManagementSystem-GitOps
 
 1. clone the repository
 2. make sure you've installed Jenkins, minikube, Docker, and kubectl in your system using following command
